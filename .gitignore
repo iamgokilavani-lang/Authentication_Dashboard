@@ -218,3 +218,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 .map
+node_modules/
+dist/
+.env
+.env.local
