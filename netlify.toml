@@ -1,0 +1,23 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Keep the booking dashboard as a separate static application.
+[[redirects]]
+  from = "/booking"
+  to = "/booking/dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/booking/"
+  to = "/booking/dashboard.html"
+  status = 200
+
+# Authentication SPA fallback.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

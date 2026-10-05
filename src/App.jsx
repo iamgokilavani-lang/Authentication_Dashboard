@@ -7,22 +7,34 @@ import { LoginForm } from './components/auth/LoginForm';
 import { RegisterForm } from './components/auth/RegisterForm';
 import { ForgotPasswordForm } from './components/auth/ForgotPasswordForm';
 import { ResetPasswordForm } from './components/auth/ResetPasswordForm';
-import { DashboardLayout } from './components/dashboard/DashboardLayout';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import './index.css';
 import './styles/auth.css';
 import './styles/dashboard.css';
 
+
+const BookingDashboardRedirect = () => {
+  useEffect(() => {
+    window.location.replace('/booking/dashboard.html#dashboard');
+  }, []);
+
+  return (
+    <div className="app-root" style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}>
+      <p>Opening booking dashboard…</p>
+    </div>
+  );
+};
+
 const MainApp = () => {
   const { isAuthenticated } = useAuth();
 
-  // Screen router: 'login' | 'register' | 'forgot' | 'reset' | 'dashboard'
+  // Screen router: authentication screens plus the protected booking dashboard handoff.
   const [currentScreen, setCurrentScreen] = useState(() => {
     const hash = window.location.hash.replace('#', '');
-    if (['login', 'register', 'forgot', 'reset', 'dashboard'].includes(hash)) {
+    if (['login', 'register', 'forgot', 'reset'].includes(hash)) {
       return hash;
     }
-    return isAuthenticated ? 'dashboard' : 'login';
+    return isAuthenticated ? 'booking' : 'login';
   });
 
   const [resetParams, setResetParams] = useState({
@@ -32,14 +44,16 @@ const MainApp = () => {
 
   // Keep URL hash synchronized for deep-linking & refreshing
   useEffect(() => {
-    window.location.hash = currentScreen;
+    if (currentScreen !== 'booking') {
+      window.location.hash = currentScreen;
+    }
   }, [currentScreen]);
 
   // Listen for browser back/forward navigation
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      if (['login', 'register', 'forgot', 'reset', 'dashboard'].includes(hash)) {
+      if (['login', 'register', 'forgot', 'reset'].includes(hash)) {
         setCurrentScreen(hash);
       }
     };
@@ -50,7 +64,7 @@ const MainApp = () => {
   // When auth changes
   useEffect(() => {
     if (isAuthenticated && currentScreen === 'login') {
-      setCurrentScreen('dashboard');
+      setCurrentScreen('booking');
     }
   }, [isAuthenticated, currentScreen]);
 
@@ -61,16 +75,11 @@ const MainApp = () => {
     setCurrentScreen(screen);
   };
 
-  // If active screen is dashboard, render protected view
-  if (currentScreen === 'dashboard') {
+  // After successful authentication, hand off to the protected booking dashboard.
+  if (currentScreen === 'booking' || currentScreen === 'dashboard') {
     return (
       <ProtectedRoute onRedirectToLogin={() => setCurrentScreen('login')}>
-        <DashboardLayout
-          onTriggerProtectedSimulation={() => {
-            // Simulate unauthenticated route interception
-            setCurrentScreen('login');
-          }}
-        />
+        <BookingDashboardRedirect />
       </ProtectedRoute>
     );
   }
