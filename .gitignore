@@ -1,26 +1,10 @@
-# Dependencies
 node_modules/
-
-# Production output
 dist/
-
-# Environment / local secrets
+*.log
 .env
 .env.*
 !.env.example
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Editor / OS
-.vscode/
-.idea/
 .DS_Store
 Thumbs.db
-
-# Vite
-.vite/
+.vscode/
+.idea/

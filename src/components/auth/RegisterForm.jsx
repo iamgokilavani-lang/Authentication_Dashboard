@@ -86,7 +86,7 @@ export const RegisterForm = ({ onNavigate }) => {
       }
 
       showToast(`Welcome to Aurora, ${result.user.name}! Account ready.`, 'success');
-      onNavigate('booking');
+      onNavigate('dashboard');
     } else {
       showToast(result.error, 'error');
       setErrors((prev) => ({ ...prev, form: result.error }));
