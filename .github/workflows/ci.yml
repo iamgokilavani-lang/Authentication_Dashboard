@@ -1,0 +1,50 @@
+name: Build dashboards
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  authentication-dashboard:
+    name: Aurora authentication dashboard
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/authentication-dashboard
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: projects/authentication-dashboard/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+
+  booking-dashboard:
+    name: Wanderlust booking dashboard
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/booking-dashboard
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: projects/booking-dashboard/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build

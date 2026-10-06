@@ -1,15 +1,13 @@
 {
-  "name": "wanderlust-auth-booking-portal",
+  "name": "dashboard-1",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview",
-    "check:booking": "node --check public/booking/js/data.js && node --check public/booking/js/app.js && node --check public/booking/js/auth-guard.js",
-    "test": "npm run lint && npm run check:booking && npm run build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

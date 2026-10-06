@@ -136,12 +136,12 @@
           <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
             alt="Admin Avatar" class="user-avatar">
           <div class="user-details">
-            <span class="user-name" data-session-user-name>Authenticated User</span>
-            <span class="user-role" data-session-user-role>Travel Administrator</span>
+            <span class="user-name">Gokilavani</span>
+            <span class="user-role">Gokilavani</span>
           </div>
-          <button class="logout-btn" title="Sign out" aria-label="Sign out"
-            onclick="window.portalSession.logout()">
-            <i class="fa-solid fa-right-from-bracket"></i>
+          <button class="logout-btn" title="Quick Profile Settings"
+            onclick="app.showToast('Logged in as Gokilavani (Admin)', 'info')">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
           </button>
         </div>
       </div>
@@ -1842,9 +1842,6 @@
 
   <!-- Toast Notifications Container -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
-
-  <!-- Authentication guard must run before dashboard modules. -->
-  <script src="js/auth-guard.js"></script>
 
   <!-- Javascript Modules -->
   <script src="js/data.js"></script>

@@ -64,7 +64,7 @@ export const LoginForm = ({ onNavigate }) => {
 
     if (result.success) {
       showToast(`Welcome back, ${result.user.name}!`, 'success');
-      onNavigate('booking');
+      onNavigate('dashboard');
     } else {
       showToast(result.error, 'error');
       setErrors((prev) => ({ ...prev, form: result.error }));
